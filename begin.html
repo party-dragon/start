@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>party_dragon_search</title>
+    <meta
+      name="description"
+      content="记录和提醒当前最重要的事，可以设置为浏览器起始页tab"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center;
+        justify-content: center; */
+        height: 100vh;
+        background-image: url("peaky_blinder.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+      button {
+        background: 0;
+        margin: 20px;
+        width: 150px;
+        font-size: 30px;
+        height: 50px;
+        border-radius: 4px;
+        border: 1px solid rgb(110, 98, 98);
+        outline: none;
+      }
+      #shuRuKuang {
+        border: 0;
+        /* 下划线 */
+        border-bottom: 2px solid #603434;
+        padding: 4px 2px;
+        display: block;
+        background: 0;
+        line-height: 1.5;
+        outline: none;
+        text-align: center;
+        transition: border-color 0.2s ease-in-out;
+        border-radius: 0;
+        /* 输入文字颜色 */
+        color: #891717;
+        font-size: 2rem;
+        max-width: 90%;
+      }
+      .flex_type_rr {
+        display: flex;
+      }
+      .flex_type_cc {
+        flex-direction: column;
+      }
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #anNiu {
+        margin-left: -50px;
+        margin-right: 10px;
+        color: #ccc;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+      }
+
+      input::placeholder {
+        color: #7b1212;
+      }
+      input::-webkit-input-placeholder {
+        color: #650707;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 搜索栏 -->
+    <div
+      class="flex_type_rr"
+      style="height: 200px; align-items: end; justify-content: center"
+    >
+      <form class="flex_type_rr" action="https://www.baidu.com/s" method="get">
+        <input
+          placeholder="你想搜索什么,点击开始输入"
+          name="wd"
+          id="shuRuKuang"
+          type="text"
+        />
+        <button type="submit">submiting</button>
+      </form>
+    </div>
+
+    <!-- 金刚区 -->
+    <div
+      class="flex_type_rr"
+      style="margin: 50px; flex: 1; justify-content: space-around"
+    >
+      <!-- 常用网站 -->
+      <div class="flex_type_cc" style="justify-content: space-around">
+        <p style="font-size: 25px; color: #822e99">happy space</p>
+        <a
+          style="color: #c9c60d"
+          href="https://codeforces.com/profile/Party_dragon"
+          >1. codeforces</a
+        >
+        <br />
+        <br />
+        <a style="color: #c9c60d" href="https://atcoder.jp/">2. atcoder</a>
+        <br />
+        <br />
+        <a style="color: #c9c60d" href="https://www.acwing.com/activity/"
+          >3. acwing</a
+        >
+        <br />
+        <br />
+        <a
+          style="color: #c9c60d"
+          href="https://www.luogu.com.cn/user/1137533#favorite"
+          >4. luogu</a
+        >
+      </div>
+
+      <!-- dragon.blog -->
+      <div><p style="font-size: 25px; color: #822e99">dragon blog</p></div>
+      <!-- 待扩展 -->
+      <div><p style="font-size: 25px; color: #822e99">dragon blog</p></div>
+    </div>
+
+    <!--  -->
+
+    <script>
+      let youShi = false;
+
+      function change() {
+        let anNiu = document.getElementById("anNiu");
+        let shuRuKuang = document.getElementById("shuRuKuang");
+
+        if (youShi) {
+          youShi = false;
+          anNiu.innerText = "✔";
+          shuRuKuang.style.borderBottomColor = "#fff";
+          shuRuKuang.value = "";
+          shuRuKuang.readOnly = false;
+          window.localStorage.removeItem("shi");
+        } else {
+          youShi = true;
+          anNiu.innerText = "✘";
+          shuRuKuang.style.borderBottomColor = "transparent";
+          shuRuKuang.readOnly = true;
+          window.localStorage.setItem("shi", shuRuKuang.value);
+        }
+      }
+      let data = window.localStorage.getItem("shi");
+      if (data) {
+        document.getElementById("shuRuKuang").value = data;
+        change();
+      }
+    </script>
+  </body>
+</html>
